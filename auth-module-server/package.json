@@ -1,0 +1,17 @@
+{
+  "name": "auth-module-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server-express": "^2.9.16",
+    "express": "^4.17.1",
+    "graphql-middleware": "^4.0.2",
+    "path": "^0.12.7"
+  }
+}
