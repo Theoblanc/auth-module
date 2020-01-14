@@ -1,0 +1,6 @@
+scalar Date
+
+type Return {
+  ok: Boolean!
+  error: String
+}
