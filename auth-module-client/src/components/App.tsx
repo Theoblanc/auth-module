@@ -1,8 +1,8 @@
 import React from "react";
-import Login from "../pages/Login";
+// import Login from "../pages/Login";
 
 const App: React.FC = () => {
-  return <Login></Login>;
+  return <React.Fragment></React.Fragment>;
 };
 
 export default App;
