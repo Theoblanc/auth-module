@@ -1,0 +1,38 @@
+scalar Date
+
+type Return {
+  ok: Boolean!
+  error: String
+}
+
+type Query {
+  # User
+  fetchMe: UserProfile!
+}
+
+type Mutation {
+  # User
+  createUser(email: String!, password: String!): Return!
+}
+
+# ### User ####
+type User {
+  id: ID
+  email: String
+  # password: String
+  createdAt: Date
+  updatedAt: Date
+}
+
+type UserProfile {
+  name: String
+  picture: String
+  phone: Int
+  school: String
+  birthday: Int
+  gender: String
+  userId: String
+  createdAt: Date
+  updatedAt: Date
+}
+

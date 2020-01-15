@@ -1,0 +1,9 @@
+type Query {
+  # User
+  fetchMe: UserProfile!
+}
+
+type Mutation {
+  # User
+  createUser(email: String!, password: String!): Return!
+}
