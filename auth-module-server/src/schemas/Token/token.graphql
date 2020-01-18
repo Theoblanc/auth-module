@@ -1,0 +1,8 @@
+type Mutation {
+  createAccessToken(refreshToken: String!): TokenModel
+}
+
+type TokenModel {
+  accessToken: String!
+  refreshToken: String
+}
