@@ -1,18 +1,19 @@
 # Dockerfile
-FROM node:12.9
+FROM node:12.14.1
 
-RUN mkdir -p /usr/src/app
+RUN mkdir frontend
 
-WORKDIR /usr/src/app
+WORKDIR /frontend
 
 
-COPY yarn.lock /app
-COPY package.json /app
+COPY . /frontend/
 
 RUN yarn && yarn cache clean --force
-
-COPY . /usr/src/app
 
 EXPOSE 3000
 
 CMD ["yarn", "start"]
+
+
+
+
