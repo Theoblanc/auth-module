@@ -1,16 +1,16 @@
-import bcrypt from "bcrypt";
-import fs from "fs";
 import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
+import fs from "fs";
 import Token from "src/entities/Postgres/Token/Token.postgres";
 
 const PUBLICK_KEY = fs.readFileSync("src/certs/public.pem");
 const PRIVATE_KEY = fs.readFileSync("src/certs/private.pem");
+
 interface IGetHashedPassword {
   (password: string): Promise<string>;
 }
 
 const SALT_ROUNDS = 10;
-
 const getHashedPassword: IGetHashedPassword = async password =>
   await bcrypt.hash(password, SALT_ROUNDS);
 

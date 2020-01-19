@@ -1,0 +1,54 @@
+type Return {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  createAccessToken(refreshToken: String!): TokenModel
+  # User
+  loginUser(email: String!, password: String!): TokenModel!
+  createUser(email: String!, password: String!): Return!
+}
+
+type TokenModel {
+  accessToken: String!
+  refreshToken: String
+}
+
+type Query {
+  # User
+  fetchMe: UserProfile!
+  fetchUser(userId: String!): UserProfile!
+}
+
+type Token {
+  id: String!
+  createdAt: String!
+  updatedAt: String!
+  accessedAt: String!
+  userId: String!
+}
+
+enum Role {
+  REGULAR
+  ADMIN
+}
+
+type User {
+  id: String!
+  createdAt: String!
+  updatedAt: String!
+  email: String!
+  password: String!
+  role: Role!
+}
+
+type UserProfile {
+  id: String!
+  createdAt: String!
+  updatedAt: String!
+  email: String!
+  # password: String!
+  role: Role!
+}
+
