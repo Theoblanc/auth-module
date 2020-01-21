@@ -1,12 +1,27 @@
 import React from "react";
 
-const LoginPresenter: React.FC = () => {
+interface IProps {
+  onSubmit: Function;
+  register: any;
+  handleSubmit: Function;
+}
+
+const LoginPresenter: React.FC<IProps> = ({
+  register,
+  handleSubmit,
+  onSubmit
+}) => {
   return (
     <div>
       <div>Login 페이지</div>
-      <form>
-        <input type="text" placeholder="login"></input>
-        <input type="password" placeholder="password"></input>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <input type="text" placeholder="login" name="id" ref={register}></input>
+        <input
+          type="password"
+          placeholder="password"
+          name="password"
+          ref={register}
+        ></input>
         <input type="submit"></input>
       </form>
     </div>
