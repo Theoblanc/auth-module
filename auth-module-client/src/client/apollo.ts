@@ -1,18 +1,17 @@
-import { ApolloClient } from "apollo-client";
-import { InMemoryCache } from "apollo-cache-inmemory";
+import ApolloClient, { InMemoryCache } from "apollo-boost";
 import jwtDecode from "jwt-decode";
+import { Operation } from "apollo-link";
 
 // Instantiate required constructor fields
 
 const cache = new InMemoryCache();
 
-interface IProps {
-  uri: string
+interface ApolloClientOptions {
+  uri: string;
 }
 
-const apolloClientOptions:IProps = {
-  uri: "http://pickqa-backend.pickqa.com:4000" // 서버 주소
-  // uri: "http://10.0.2.2:4000" // 로컬 주소
+const apolloClientOptions: ApolloClientOptions = {
+  uri: "http://localhost:4000/graphql" // local 주소
 };
 
 interface Resolvers {
@@ -68,7 +67,7 @@ const getToken = async () => {
           return access_token;
         }
       } catch (e) {
-        console.log(e)
+        console.log(e);
       }
     }
 
@@ -100,22 +99,24 @@ const getToken = async () => {
     await localStorage.setItem("access_token", token);
     return token;
   }
+};
 
 const client = new ApolloClient({
   uri: apolloClientOptions.uri,
   cache: cache,
-  resolvers,
-  queryDeduplication: false,
-  request: async (operation: any) => {
-    let access_token: String;
+  clientState: {
+    resolvers
+  },
+  request: async (operation: Operation) => {
+    let token: String | undefined;
     try {
-      access_token = await getToken();
+      token = await getToken();
     } catch (e) {
       console.log(e);
     }
     operation.setContext({
       headers: {
-        authorization: access_token ? `Bearer ${access_token}` : ""
+        authorization: token ? `Bearer ${token}` : ""
       }
     });
   }
