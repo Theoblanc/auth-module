@@ -1,9 +1,9 @@
 import React from "react";
-import client from "../client/apollo";
+import client from "../client/Apollo";
 import { ApolloProvider } from "@apollo/react-hooks";
 import Routes from "./Routes";
-import { GlobalStyle } from "../styles/global-styles";
-import { ThemeProvider } from "../styles/typed-components";
+import { GlobalStyle } from "../styles/Global-styles";
+import { ThemeProvider } from "../styles/Typed-components";
 import theme from "../styles/Theme";
 
 const App: React.FC = () => {
