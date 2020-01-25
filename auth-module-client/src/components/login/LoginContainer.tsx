@@ -1,11 +1,25 @@
 import React from "react";
 import LoginPresenter from "./LoginPresenter";
 import { useForm } from "react-hook-form";
+import { useMutation } from "@apollo/react-hooks";
+import { LOGIN_USER } from "./LoginQueries";
 
 const LoginContainer: React.FC = () => {
   const { register, handleSubmit } = useForm();
+  const [loginMutation] = useMutation(LOGIN_USER);
 
-  const onSubmit = (data: any) => {
+  const onSubmit = async (data: any) => {
+    const variables = {
+      email: data.email,
+      password: data.password
+    };
+
+    try {
+      await loginMutation({ variables });
+    } catch (e) {
+      console.log(e);
+    }
+
     console.log(data);
   };
 
