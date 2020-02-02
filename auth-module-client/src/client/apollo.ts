@@ -63,6 +63,8 @@ const getToken = async () => {
       try {
         const { exp } = jwtDecode(access_token);
 
+        console.log(exp);
+
         if (Date.now() < (exp - 600) * 1000) {
           return access_token;
         }
@@ -71,30 +73,32 @@ const getToken = async () => {
       }
     }
 
+    //만료 access token
+
     const res = await fetch(apolloClientOptions.uri, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         operationName: "token",
         query: `
-          mutation token(
-            $token: String!
+          mutation createAccessToken(
+            $refreshToken: String!
           ) {
             token(
-              grant_type: "refresh_token",
-              refresh_token: $token
+              refreshToken: $refreshToken
             ) {
               access_token
             }
           }
         `,
         variables: {
-          token: refresh_token
+          refreshToken: refresh_token
         }
       })
     });
 
     const { data } = await res.json();
+    console.log("123data", data);
     const token = data.token.access_token;
     await localStorage.setItem("access_token", token);
     return token;
@@ -111,6 +115,7 @@ const client = new ApolloClient({
     let token: String | undefined;
     try {
       token = await getToken();
+      console.log("token", token);
     } catch (e) {
       console.log(e);
     }

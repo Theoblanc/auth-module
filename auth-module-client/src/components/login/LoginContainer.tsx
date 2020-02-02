@@ -15,7 +15,16 @@ const LoginContainer: React.FC = () => {
     };
 
     try {
-      await loginMutation({ variables });
+      const {
+        data: {
+          loginUser: { accessToken, refreshToken }
+        }
+      } = await loginMutation({ variables });
+
+      //토큰 저장
+
+      localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("refreshToken", refreshToken);
     } catch (e) {
       console.log(e);
     }

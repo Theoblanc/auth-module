@@ -15,7 +15,12 @@ const LoginPresenter: React.FC<IProps> = ({
     <div>
       <div>Login 페이지</div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <input type="text" placeholder="login" name="id" ref={register}></input>
+        <input
+          type="text"
+          placeholder="login"
+          name="email"
+          ref={register}
+        ></input>
         <input
           type="password"
           placeholder="password"
