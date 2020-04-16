@@ -11,17 +11,17 @@ const LoginContainer: React.FC = () => {
   const onSubmit = async (data: any) => {
     const variables = {
       email: data.email,
-      password: data.password
+      password: data.password,
     };
 
     try {
       const {
         data: {
-          loginUser: { accessToken, refreshToken }
-        }
+          loginUser: { accessToken, refreshToken },
+        },
       } = await loginMutation({ variables });
 
-      //토큰 저장
+      //session으로 바꾸자
 
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("refreshToken", refreshToken);

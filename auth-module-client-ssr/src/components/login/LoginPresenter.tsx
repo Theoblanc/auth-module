@@ -1,4 +1,5 @@
 import React from "react";
+import { LoginWrapper } from "./LoginStyles";
 
 interface IProps {
   onSubmit: Function;
@@ -9,27 +10,22 @@ interface IProps {
 const LoginPresenter: React.FC<IProps> = ({
   register,
   handleSubmit,
-  onSubmit
+  onSubmit,
 }) => {
   return (
-    <div>
+    <LoginWrapper>
       <div>Login 페이지</div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <input
-          type="text"
-          placeholder="login"
-          name="email"
-          ref={register}
-        ></input>
+        <input type="text" placeholder="login" name="email" ref={register} />
         <input
           type="password"
           placeholder="password"
           name="password"
           ref={register}
-        ></input>
-        <input type="submit"></input>
+        />
+        <button type="submit">login</button>
       </form>
-    </div>
+    </LoginWrapper>
   );
 };
 

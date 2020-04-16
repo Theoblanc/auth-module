@@ -1,3 +1,6 @@
-const Home = () => <h1>Hello world!</h1>;
+import React from "react";
+import Login from "../src/components/login";
 
-export default Home;
+const LoginPage = () => <Login />;
+
+export default LoginPage;
