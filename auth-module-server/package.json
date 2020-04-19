@@ -14,9 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@types/app-module-path": "^2.2.0",
-    "@types/bcryptjs": "^2.4.2",
-    "@types/jsonwebtoken": "^8.3.6",
+    "@types/js-cookie": "^2.2.6",
     "apollo-server-express": "^2.9.16",
     "app-module-path": "^2.2.0",
     "babel-runtime": "^6.26.0",
@@ -27,6 +25,7 @@
     "graphql-shield": "^7.0.7",
     "graphql-to-typescript": "^0.1.2",
     "graphql-yoga": "^1.18.3",
+    "js-cookie": "^2.2.1",
     "jsonwebtoken": "^8.5.1",
     "merge-graphql-schemas": "^1.7.6",
     "nodemon": "^2.0.2",
@@ -34,7 +33,10 @@
     "typeorm": "^0.2.22"
   },
   "devDependencies": {
+    "@types/app-module-path": "^2.2.0",
+    "@types/bcryptjs": "^2.4.2",
     "@types/cors": "^2.8.6",
+    "@types/jsonwebtoken": "^8.3.6",
     "@types/morgan": "^1.7.37",
     "@types/node": "^13.1.8",
     "pg": "^7.17.1",
