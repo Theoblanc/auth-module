@@ -32,13 +32,7 @@ const LoginContainer: React.FC = () => {
     console.log(data);
   };
 
-  return (
-    <LoginPresenter
-      onSubmit={onSubmit}
-      register={register}
-      handleSubmit={handleSubmit}
-    />
-  );
+  return <LoginPresenter onSubmit={onSubmit} register={register} handleSubmit={handleSubmit} />;
 };
 
 export default LoginContainer;

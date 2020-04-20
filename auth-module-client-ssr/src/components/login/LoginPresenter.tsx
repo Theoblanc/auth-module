@@ -1,5 +1,5 @@
 import React from "react";
-import { LoginWrapper } from "./LoginStyles";
+import { LoginWrapper, Icon } from "./LoginStyles";
 
 interface IProps {
   onSubmit: Function;
@@ -7,23 +7,30 @@ interface IProps {
   handleSubmit: Function;
 }
 
-const LoginPresenter: React.FC<IProps> = ({
-  register,
-  handleSubmit,
-  onSubmit,
-}) => {
+const LoginPresenter: React.FC<IProps> = ({ register, handleSubmit, onSubmit }) => {
   return (
     <LoginWrapper>
-      <div>Login 페이지</div>
+      <div>
+        <Icon src='/images/logo512.png' alt='react'></Icon>
+      </div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <input type="text" placeholder="login" name="email" ref={register} />
-        <input
-          type="password"
-          placeholder="password"
-          name="password"
-          ref={register}
-        />
-        <button type="submit">login</button>
+        <div>
+          <label>아이디</label>
+          <input type='text' placeholder='login' name='email' ref={register} autoComplete='email' />
+        </div>
+
+        <div>
+          <label>비밀번호</label>
+          <input
+            type='password'
+            placeholder='password'
+            name='password'
+            autoComplete='new-password'
+            ref={register}
+          />
+        </div>
+
+        <button type='submit'>로그인</button>
       </form>
     </LoginWrapper>
   );

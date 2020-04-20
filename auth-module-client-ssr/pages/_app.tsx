@@ -7,6 +7,7 @@ import Head from "next/head";
 
 import { InMemoryCache } from "apollo-cache-inmemory";
 import App from "next/app";
+import GlobalStyle from "../styles/Globalstyles";
 
 class MyApp extends App<any> {
   public render() {
@@ -16,17 +17,21 @@ class MyApp extends App<any> {
       <>
         <Head>
           <title>로그인 모듈</title>
-          <script>
-            window.__APOLLO_STATE__ = JSON.stringify(client.extract());
-          </script>
         </Head>
         <ApolloProvider client={apollo}>
+          <GlobalStyle />
           <Component {...pageProps} />
         </ApolloProvider>
       </>
     );
   }
 }
+
+MyApp.getInitialProps = async (appContext) => {
+  const appProps = await App.getInitialProps(appContext);
+  console.log("appProps", appProps);
+  return { ...appProps };
+};
 
 export default withApollo(({ initialState }) => {
   console.log("initialState", initialState);

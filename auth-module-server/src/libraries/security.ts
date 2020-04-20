@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 import fs from "fs";
 import jsCookie from "js-cookie";
 import { Response } from "express";
+import Token from "src/entities/Postgres/Token/Token.postgres";
 
 const PUBLICK_KEY = fs.readFileSync("src/certs/public.pem");
 const PRIVATE_KEY = fs.readFileSync("src/certs/private.pem");
@@ -72,7 +73,23 @@ interface ICreateRefreshToken {
 
 const createRefreshToken: ICreateRefreshToken = async (id) => {
   // DB 리프레쉬 토큰 생성
+  const refreshToken = await Token.create({
+    // user.id: id,
+    accessedAt: new Date(),
+  });
+
+  const JWTToken = await jwt.sign({}, PRIVATE_KEY, {
+    jwtid: String(refreshToken._id),
+    algorithm: "ES256",
+    subject: "refreshToken",
+  });
+
+  return JWTToken;
   // JWT 리프레쉬 토큰 생성
+  // const accessToken = await jwt.sign({ id: JWT.id }, PRIVATE_KEY, {
+  //   algorithm: "ES256",
+  //   subject: "accessToken",
+  // });
   //
 };
 
@@ -90,4 +107,5 @@ export {
   getUserFromAccessToken,
   createAccessToken,
   createRefreshToken,
+  sendRefreshToken,
 };

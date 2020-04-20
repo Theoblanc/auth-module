@@ -5,7 +5,7 @@ import {
   UpdateDateColumn,
   Column,
   ManyToOne,
-  Entity
+  Entity,
 } from "typeorm";
 import User from "../User/User.postgres";
 
@@ -18,7 +18,7 @@ class Token extends BaseEntity {
   @Column({ type: "timestamp" })
   accessedAt!: Date;
 
-  @ManyToOne(() => User)
+  @ManyToOne((type) => User)
   user!: User;
 }
 

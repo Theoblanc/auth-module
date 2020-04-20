@@ -1,0 +1,38 @@
+{
+  "env": {
+    "development": {
+      "plugins": [
+        ["styled-components", { "ssr": true, "displayName": true, "preprocess": false }],
+        [
+          "module-resolver",
+          {
+            "root": ["./"],
+            "alias": {
+              "src": "./src/",
+              "styles": "./styles/"
+            },
+            "extensions": [".js", ".jsx", ".tsx", ".ts"]
+          }
+        ]
+      ],
+      "presets": ["next/babel"]
+    },
+    "production": {
+      "plugins": [
+        ["styled-components", { "ssr": true, "displayName": true, "preprocess": false }],
+        [
+          "module-resolver",
+          {
+            "root": ["./"],
+            "alias": {
+              "src": "./src"
+            },
+            "extensions": [".js", ".jsx", ".tsx", ".ts"]
+          }
+        ]
+      ],
+      "presets": ["next/babel"]
+    }
+  },
+  "plugins": [["styled-components", { "ssr": true, "displayName": true, "preprocess": false }]]
+}
