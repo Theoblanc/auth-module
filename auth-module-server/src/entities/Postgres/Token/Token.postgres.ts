@@ -4,22 +4,22 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   Column,
-  ManyToOne,
+  OneToOne,
   Entity,
 } from "typeorm";
-import User from "../User/User.postgres";
+import { User } from "src/types/graph";
 
 @Entity()
 class Token extends BaseEntity {
   @PrimaryGeneratedColumn("uuid") id!: string;
-  @CreateDateColumn() createdAt!: string;
-  @UpdateDateColumn() updatedAt!: string;
+  @CreateDateColumn({ type: "timestamp" }) createdAt!: Date;
+  @UpdateDateColumn({ type: "timestamp" }) updatedAt!: Date;
 
   @Column({ type: "timestamp" })
   accessedAt!: Date;
 
-  @ManyToOne((type) => User)
-  user!: User;
+  @OneToOne("User")
+  userId!: string;
 }
 
 export default Token;

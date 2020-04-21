@@ -49,22 +49,44 @@ const getUserFromAccessToken: IGetUserFromAccessToken = async (accessToken) => {
 };
 
 interface ICreateAccessToken {
-  (refreshToken: string): Promise<string>;
+  (refreshToken: string, res: Response): Promise<string>;
 }
 
-const createAccessToken: ICreateAccessToken = async (refreshToken) => {
+const createAccessToken: ICreateAccessToken = async (refreshToken, res) => {
   // JWT 리프레쉬 토큰 검증
-  const JWT: any = await jwt.verify(refreshToken, PUBLICK_KEY);
 
-  // JWT 엑세스 토큰 생성
-  const accessToken = await jwt.sign({ id: JWT.id }, PRIVATE_KEY, {
-    algorithm: "ES256",
-    subject: "accessToken",
-  });
+  try {
+    const JWTResfreshToken: any = await jwt.verify(refreshToken, PUBLICK_KEY);
+    const RefreshToken = await Token.findOne({ id: JWTResfreshToken.jti });
+    if (!RefreshToken) throw new Error();
 
-  jsCookie.set("accessToken", accessToken);
+    const twoWeek = 2 * 60 * 60 * 7 * 1000;
+    const isExpired =
+      new Date().getTime() >
+      new Date(RefreshToken.updatedAt).getTime() + twoWeek;
+    if (isExpired) throw new Error();
 
-  return accessToken;
+    await Token.update({ id: JWTResfreshToken.jti }, { updatedAt: new Date() });
+
+    const twoHour = 2 * 60 * 60; // seconds only
+    // JWT 엑세스 토큰 생성
+    const accessToken = await jwt.sign(
+      { id: JWTResfreshToken.id },
+      PRIVATE_KEY,
+      {
+        algorithm: "ES256",
+        subject: "accessToken",
+        expiresIn: twoHour,
+      }
+    );
+
+    console.log("accessToken", accessToken);
+    return accessToken;
+  } catch (error) {
+    res.cookie("accessToken", "", { httpOnly: true });
+    res.cookie("refreshToken", "", { httpOnly: true });
+    return "";
+  }
 };
 
 interface ICreateRefreshToken {
@@ -74,23 +96,17 @@ interface ICreateRefreshToken {
 const createRefreshToken: ICreateRefreshToken = async (id) => {
   // DB 리프레쉬 토큰 생성
   const refreshToken = await Token.create({
-    // user.id: id,
+    userId: id,
     accessedAt: new Date(),
-  });
+  }).save();
 
   const JWTToken = await jwt.sign({}, PRIVATE_KEY, {
-    jwtid: String(refreshToken._id),
+    jwtid: String(refreshToken.id),
     algorithm: "ES256",
     subject: "refreshToken",
   });
 
   return JWTToken;
-  // JWT 리프레쉬 토큰 생성
-  // const accessToken = await jwt.sign({ id: JWT.id }, PRIVATE_KEY, {
-  //   algorithm: "ES256",
-  //   subject: "accessToken",
-  // });
-  //
 };
 
 const sendRefreshToken = (res: Response, refreshToken: string) => {
