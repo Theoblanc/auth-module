@@ -1,0 +1,3 @@
+type Return {
+  message: String
+}

@@ -1,0 +1,53 @@
+{
+  "name": "auth-jwt_backend_typeorm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "pretypes": "gql-merge ./src/schemas/**/*.graphql ./src/entities/**/*.graphql > ./src/types/graph.d.graphql",
+    "types": "graphql-to-typescript ./src/types/graph.d.graphql ./src/types/graph.d.ts",
+    "predev": "npm run types",
+    "preprod": "npm run types",
+    "dev": "nodemon --exec ts-node ./src/server.ts -e ts,graphql",
+    "prod": "ts-node ./src/server.ts",
+    "generate": "graphql-codegen --config codegen.yml"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/js-cookie": "^2.2.6",
+    "apollo-server-express": "^2.9.16",
+    "app-module-path": "^2.2.0",
+    "babel-runtime": "^6.26.0",
+    "bcryptjs": "^2.4.3",
+    "express": "^4.17.1",
+    "gql-merge": "^0.0.6",
+    "graphql": "^15.0.0",
+    "graphql-middleware": "^4.0.2",
+    "graphql-shield": "^7.0.7",
+    "graphql-to-typescript": "^0.1.2",
+    "graphql-yoga": "^1.18.3",
+    "js-cookie": "^2.2.1",
+    "jsonwebtoken": "^8.5.1",
+    "merge-graphql-schemas": "^1.7.6",
+    "nodemon": "^2.0.2",
+    "path": "^0.12.7",
+    "typeorm": "^0.2.22"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^1.15.1",
+    "@graphql-codegen/introspection": "1.15.0",
+    "@graphql-codegen/schema-ast": "^1.15.1",
+    "@graphql-codegen/typescript": "1.15.0",
+    "@graphql-codegen/typescript-resolvers": "1.15.0",
+    "@types/app-module-path": "^2.2.0",
+    "@types/bcryptjs": "^2.4.2",
+    "@types/cors": "^2.8.6",
+    "@types/jsonwebtoken": "^8.3.6",
+    "@types/morgan": "^1.7.37",
+    "@types/node": "^13.1.8",
+    "pg": "^7.17.1",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.7.5"
+  }
+}

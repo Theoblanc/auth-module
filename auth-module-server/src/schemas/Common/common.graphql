@@ -1,4 +1,0 @@
-type Return {
-  ok: Boolean!
-  error: String
-}

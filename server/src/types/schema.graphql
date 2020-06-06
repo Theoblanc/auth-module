@@ -1,0 +1,43 @@
+type Token {
+  id: String!
+  userId: String!
+  accessedAt: String!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type User {
+  id: String!
+  email: String!
+  password: String!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type UserProfile {
+  id: String!
+  createdAt: String!
+  updatedAt: String!
+  email: String!
+}
+
+type Return {
+  ok: Boolean!
+  error: String
+}
+
+type Mutation {
+  createAccessToken(refreshToken: String!): TokenModel
+  createUser(email: String!, password: String!): Return!
+  loginUser(email: String!, password: String!): TokenModel!
+}
+
+type TokenModel {
+  accessToken: String!
+  refreshToken: String
+}
+
+type Query {
+  fetchMe: UserProfile!
+  fetchUser(userId: String!): UserProfile!
+}
