@@ -19,5 +19,7 @@ services:
     image: postgres:11
     environment:
       POSTGRES_PASSWORD: "1234"
+      POSTGRES_USER: Theo
+
     ports:
       - 5432:5432

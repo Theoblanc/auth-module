@@ -22,14 +22,13 @@ type UserProfile {
 }
 
 type Return {
-  ok: Boolean!
-  error: String
+  message: String
 }
 
 type Mutation {
   createAccessToken(refreshToken: String!): TokenModel
   createUser(email: String!, password: String!): Return!
-  loginUser(email: String!, password: String!): TokenModel!
+  login(email: String!, password: String!): TokenModel!
 }
 
 type TokenModel {

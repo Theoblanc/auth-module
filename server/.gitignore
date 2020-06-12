@@ -10,7 +10,6 @@
 /src/certs
 .env
 .env.prod
-.env.dev
 
 # testing
 /coverage

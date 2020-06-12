@@ -8,10 +8,10 @@ const typeDefs: any = mergeTypes(allTypes);
 const resolvers: any = mergeResolvers(allResolvers);
 
 const context = async ({ req }: any) => {
-  const accessToken = await (
-    await authorizations(req)
-  ).getAccessTokenFromHeader();
-  const user = await (await authorizations(req)).getUserFromAccessToken(
+  const accessToken = await (await authorizations()).getAccessTokenFromHeader(
+    req.context
+  );
+  const user = await (await authorizations()).getUserFromAccessToken(
     accessToken
   );
   return { ...req, user };

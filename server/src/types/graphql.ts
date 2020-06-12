@@ -34,14 +34,13 @@ export type IUserProfile = {
 };
 
 export type IReturn = {
-  ok: Scalars['Boolean'];
-  error?: Maybe<Scalars['String']>;
+  message?: Maybe<Scalars['String']>;
 };
 
 export type IMutation = {
   createAccessToken?: Maybe<ITokenModel>;
   createUser: IReturn;
-  loginUser: ITokenModel;
+  login: ITokenModel;
 };
 
 
@@ -56,7 +55,7 @@ export type IMutationCreateUserArgs = {
 };
 
 
-export type IMutationLoginUserArgs = {
+export type IMutationLoginArgs = {
   email: Scalars['String'];
   password: Scalars['String'];
 };
@@ -150,28 +149,28 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type IResolversTypes = ResolversObject<{
-  String: ResolverTypeWrapper<Scalars['String']>;
-  Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Token: ResolverTypeWrapper<IToken>;
+  String: ResolverTypeWrapper<Scalars['String']>;
   User: ResolverTypeWrapper<IUser>;
   UserProfile: ResolverTypeWrapper<IUserProfile>;
   Return: ResolverTypeWrapper<IReturn>;
   Mutation: ResolverTypeWrapper<{}>;
   TokenModel: ResolverTypeWrapper<ITokenModel>;
   Query: ResolverTypeWrapper<{}>;
+  Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
 }>;
 
 /** Mapping between all available schema types and the resolvers parents */
 export type IResolversParentTypes = ResolversObject<{
-  String: Scalars['String'];
-  Boolean: Scalars['Boolean'];
   Token: IToken;
+  String: Scalars['String'];
   User: IUser;
   UserProfile: IUserProfile;
   Return: IReturn;
   Mutation: {};
   TokenModel: ITokenModel;
   Query: {};
+  Boolean: Scalars['Boolean'];
 }>;
 
 export type ITokenResolvers<ContextType = any, ParentType extends IResolversParentTypes['Token'] = IResolversParentTypes['Token']> = ResolversObject<{
@@ -201,15 +200,14 @@ export type IUserProfileResolvers<ContextType = any, ParentType extends IResolve
 }>;
 
 export type IReturnResolvers<ContextType = any, ParentType extends IResolversParentTypes['Return'] = IResolversParentTypes['Return']> = ResolversObject<{
-  ok?: Resolver<IResolversTypes['Boolean'], ParentType, ContextType>;
-  error?: Resolver<Maybe<IResolversTypes['String']>, ParentType, ContextType>;
+  message?: Resolver<Maybe<IResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: isTypeOfResolverFn<ParentType>;
 }>;
 
 export type IMutationResolvers<ContextType = any, ParentType extends IResolversParentTypes['Mutation'] = IResolversParentTypes['Mutation']> = ResolversObject<{
   createAccessToken?: Resolver<Maybe<IResolversTypes['TokenModel']>, ParentType, ContextType, RequireFields<IMutationCreateAccessTokenArgs, 'refreshToken'>>;
   createUser?: Resolver<IResolversTypes['Return'], ParentType, ContextType, RequireFields<IMutationCreateUserArgs, 'email' | 'password'>>;
-  loginUser?: Resolver<IResolversTypes['TokenModel'], ParentType, ContextType, RequireFields<IMutationLoginUserArgs, 'email' | 'password'>>;
+  login?: Resolver<IResolversTypes['TokenModel'], ParentType, ContextType, RequireFields<IMutationLoginArgs, 'email' | 'password'>>;
 }>;
 
 export type ITokenModelResolvers<ContextType = any, ParentType extends IResolversParentTypes['TokenModel'] = IResolversParentTypes['TokenModel']> = ResolversObject<{
