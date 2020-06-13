@@ -1,14 +1,16 @@
-import { IResolvers } from "src/types/graphql";
-import loginController from "./controllers/login.controller";
-import signupController from "./controllers/signup.controller";
+import { IResolvers } from 'src/types/graphql';
+import loginController from './controllers/login.controller';
+import signUpController from './controllers/signUp.controller';
+import meController from './controllers/me.controller';
 
 const resolvers: IResolvers = {
-  Query: {},
-
   Mutation: {
     login: loginController,
-    signup: signupController,
+    signUp: signUpController
   },
+  Query: {
+    me: meController
+  }
 };
 
 export default resolvers;

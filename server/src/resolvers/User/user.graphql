@@ -1,11 +1,9 @@
-type Query {
-  # User
-  fetchMe: UserProfile!
-  fetchUser(userId: String!): UserProfile!
-}
-
 type Mutation {
   # User
   login(email: String!, password: String!): TokenModel!
-  createUser(email: String!, password: String!): Return!
+  signup(email: String!, password: String!): Success!
+}
+
+type Query {
+  me: User
 }

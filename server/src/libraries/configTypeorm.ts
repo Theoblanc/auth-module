@@ -1,17 +1,20 @@
-import { ConnectionOptions } from "typeorm";
+import { ConnectionOptions } from 'typeorm';
 
-const DATABASE_TYPE = "postgres";
-const DATABASE_ENTITIES = ["src/entities/**/**.postgres.ts"];
+const DATABASE_TYPE = 'postgres';
+const DATABASE_ENTITIES = ['src/entities/**/**.postgres.ts'];
 const connectionOptions: ConnectionOptions = {
+  name: 'default',
   type: DATABASE_TYPE,
-  database: String(process.env.DATABASE_DATABASE),
-  host: String(process.env.DATABASE_HOST),
-  port: Number(process.env.DATABASE_PORT),
-  username: String(process.env.DATABASE_USERNAME),
-  password: String(process.env.DATABASE_PASSWORD),
+  database: 'postgres',
+  host: 'localhost',
+  port: 5432,
+  username: 'postgres',
+  password: 'postgres',
   entities: DATABASE_ENTITIES,
   synchronize: true,
   logging: true
 };
+
+console.log(connectionOptions);
 
 export default connectionOptions;

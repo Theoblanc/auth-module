@@ -10,12 +10,48 @@ export type Scalars = {
   Float: number;
 };
 
+export type IMutation = {
+  createAccessToken?: Maybe<ITokenModel>;
+  login: ITokenModel;
+  signup: ISuccess;
+};
+
+
+export type IMutationCreateAccessTokenArgs = {
+  refreshToken: Scalars['String'];
+};
+
+
+export type IMutationLoginArgs = {
+  email: Scalars['String'];
+  password: Scalars['String'];
+};
+
+
+export type IMutationSignupArgs = {
+  email: Scalars['String'];
+  password: Scalars['String'];
+};
+
+export type IQuery = {
+  me?: Maybe<IUser>;
+};
+
+export type ISuccess = {
+  message?: Maybe<Scalars['String']>;
+};
+
 export type IToken = {
   id: Scalars['String'];
   userId: Scalars['String'];
   accessedAt: Scalars['String'];
   createdAt: Scalars['String'];
   updatedAt: Scalars['String'];
+};
+
+export type ITokenModel = {
+  accessToken: Scalars['String'];
+  refreshToken?: Maybe<Scalars['String']>;
 };
 
 export type IUser = {
@@ -28,51 +64,9 @@ export type IUser = {
 
 export type IUserProfile = {
   id: Scalars['String'];
+  email: Scalars['String'];
   createdAt: Scalars['String'];
   updatedAt: Scalars['String'];
-  email: Scalars['String'];
-};
-
-export type IReturn = {
-  message?: Maybe<Scalars['String']>;
-};
-
-export type IMutation = {
-  createAccessToken?: Maybe<ITokenModel>;
-  createUser: IReturn;
-  login: ITokenModel;
-};
-
-
-export type IMutationCreateAccessTokenArgs = {
-  refreshToken: Scalars['String'];
-};
-
-
-export type IMutationCreateUserArgs = {
-  email: Scalars['String'];
-  password: Scalars['String'];
-};
-
-
-export type IMutationLoginArgs = {
-  email: Scalars['String'];
-  password: Scalars['String'];
-};
-
-export type ITokenModel = {
-  accessToken: Scalars['String'];
-  refreshToken?: Maybe<Scalars['String']>;
-};
-
-export type IQuery = {
-  fetchMe: IUserProfile;
-  fetchUser: IUserProfile;
-};
-
-
-export type IQueryFetchUserArgs = {
-  userId: Scalars['String'];
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -149,28 +143,43 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type IResolversTypes = ResolversObject<{
-  Token: ResolverTypeWrapper<IToken>;
-  String: ResolverTypeWrapper<Scalars['String']>;
+  Query: ResolverTypeWrapper<{}>;
   User: ResolverTypeWrapper<IUser>;
-  UserProfile: ResolverTypeWrapper<IUserProfile>;
-  Return: ResolverTypeWrapper<IReturn>;
+  String: ResolverTypeWrapper<Scalars['String']>;
   Mutation: ResolverTypeWrapper<{}>;
   TokenModel: ResolverTypeWrapper<ITokenModel>;
-  Query: ResolverTypeWrapper<{}>;
+  Success: ResolverTypeWrapper<ISuccess>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
+  Token: ResolverTypeWrapper<IToken>;
+  UserProfile: ResolverTypeWrapper<IUserProfile>;
 }>;
 
 /** Mapping between all available schema types and the resolvers parents */
 export type IResolversParentTypes = ResolversObject<{
-  Token: IToken;
-  String: Scalars['String'];
+  Query: {};
   User: IUser;
-  UserProfile: IUserProfile;
-  Return: IReturn;
+  String: Scalars['String'];
   Mutation: {};
   TokenModel: ITokenModel;
-  Query: {};
+  Success: ISuccess;
   Boolean: Scalars['Boolean'];
+  Token: IToken;
+  UserProfile: IUserProfile;
+}>;
+
+export type IMutationResolvers<ContextType = any, ParentType extends IResolversParentTypes['Mutation'] = IResolversParentTypes['Mutation']> = ResolversObject<{
+  createAccessToken?: Resolver<Maybe<IResolversTypes['TokenModel']>, ParentType, ContextType, RequireFields<IMutationCreateAccessTokenArgs, 'refreshToken'>>;
+  login?: Resolver<IResolversTypes['TokenModel'], ParentType, ContextType, RequireFields<IMutationLoginArgs, 'email' | 'password'>>;
+  signup?: Resolver<IResolversTypes['Success'], ParentType, ContextType, RequireFields<IMutationSignupArgs, 'email' | 'password'>>;
+}>;
+
+export type IQueryResolvers<ContextType = any, ParentType extends IResolversParentTypes['Query'] = IResolversParentTypes['Query']> = ResolversObject<{
+  me?: Resolver<Maybe<IResolversTypes['User']>, ParentType, ContextType>;
+}>;
+
+export type ISuccessResolvers<ContextType = any, ParentType extends IResolversParentTypes['Success'] = IResolversParentTypes['Success']> = ResolversObject<{
+  message?: Resolver<Maybe<IResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: isTypeOfResolverFn<ParentType>;
 }>;
 
 export type ITokenResolvers<ContextType = any, ParentType extends IResolversParentTypes['Token'] = IResolversParentTypes['Token']> = ResolversObject<{
@@ -179,6 +188,12 @@ export type ITokenResolvers<ContextType = any, ParentType extends IResolversPare
   accessedAt?: Resolver<IResolversTypes['String'], ParentType, ContextType>;
   createdAt?: Resolver<IResolversTypes['String'], ParentType, ContextType>;
   updatedAt?: Resolver<IResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: isTypeOfResolverFn<ParentType>;
+}>;
+
+export type ITokenModelResolvers<ContextType = any, ParentType extends IResolversParentTypes['TokenModel'] = IResolversParentTypes['TokenModel']> = ResolversObject<{
+  accessToken?: Resolver<IResolversTypes['String'], ParentType, ContextType>;
+  refreshToken?: Resolver<Maybe<IResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: isTypeOfResolverFn<ParentType>;
 }>;
 
@@ -193,42 +208,20 @@ export type IUserResolvers<ContextType = any, ParentType extends IResolversParen
 
 export type IUserProfileResolvers<ContextType = any, ParentType extends IResolversParentTypes['UserProfile'] = IResolversParentTypes['UserProfile']> = ResolversObject<{
   id?: Resolver<IResolversTypes['String'], ParentType, ContextType>;
+  email?: Resolver<IResolversTypes['String'], ParentType, ContextType>;
   createdAt?: Resolver<IResolversTypes['String'], ParentType, ContextType>;
   updatedAt?: Resolver<IResolversTypes['String'], ParentType, ContextType>;
-  email?: Resolver<IResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: isTypeOfResolverFn<ParentType>;
-}>;
-
-export type IReturnResolvers<ContextType = any, ParentType extends IResolversParentTypes['Return'] = IResolversParentTypes['Return']> = ResolversObject<{
-  message?: Resolver<Maybe<IResolversTypes['String']>, ParentType, ContextType>;
-  __isTypeOf?: isTypeOfResolverFn<ParentType>;
-}>;
-
-export type IMutationResolvers<ContextType = any, ParentType extends IResolversParentTypes['Mutation'] = IResolversParentTypes['Mutation']> = ResolversObject<{
-  createAccessToken?: Resolver<Maybe<IResolversTypes['TokenModel']>, ParentType, ContextType, RequireFields<IMutationCreateAccessTokenArgs, 'refreshToken'>>;
-  createUser?: Resolver<IResolversTypes['Return'], ParentType, ContextType, RequireFields<IMutationCreateUserArgs, 'email' | 'password'>>;
-  login?: Resolver<IResolversTypes['TokenModel'], ParentType, ContextType, RequireFields<IMutationLoginArgs, 'email' | 'password'>>;
-}>;
-
-export type ITokenModelResolvers<ContextType = any, ParentType extends IResolversParentTypes['TokenModel'] = IResolversParentTypes['TokenModel']> = ResolversObject<{
-  accessToken?: Resolver<IResolversTypes['String'], ParentType, ContextType>;
-  refreshToken?: Resolver<Maybe<IResolversTypes['String']>, ParentType, ContextType>;
-  __isTypeOf?: isTypeOfResolverFn<ParentType>;
-}>;
-
-export type IQueryResolvers<ContextType = any, ParentType extends IResolversParentTypes['Query'] = IResolversParentTypes['Query']> = ResolversObject<{
-  fetchMe?: Resolver<IResolversTypes['UserProfile'], ParentType, ContextType>;
-  fetchUser?: Resolver<IResolversTypes['UserProfile'], ParentType, ContextType, RequireFields<IQueryFetchUserArgs, 'userId'>>;
 }>;
 
 export type IResolvers<ContextType = any> = ResolversObject<{
+  Mutation?: IMutationResolvers<ContextType>;
+  Query?: IQueryResolvers<ContextType>;
+  Success?: ISuccessResolvers<ContextType>;
   Token?: ITokenResolvers<ContextType>;
+  TokenModel?: ITokenModelResolvers<ContextType>;
   User?: IUserResolvers<ContextType>;
   UserProfile?: IUserProfileResolvers<ContextType>;
-  Return?: IReturnResolvers<ContextType>;
-  Mutation?: IMutationResolvers<ContextType>;
-  TokenModel?: ITokenModelResolvers<ContextType>;
-  Query?: IQueryResolvers<ContextType>;
 }>;
 
 

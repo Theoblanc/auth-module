@@ -1,9 +1,28 @@
+type Mutation {
+  createAccessToken(refreshToken: String!): TokenModel
+  login(email: String!, password: String!): TokenModel!
+  signup(email: String!, password: String!): Success!
+}
+
+type Query {
+  me: User
+}
+
+type Success {
+  message: String
+}
+
 type Token {
   id: String!
   userId: String!
   accessedAt: String!
   createdAt: String!
   updatedAt: String!
+}
+
+type TokenModel {
+  accessToken: String!
+  refreshToken: String
 }
 
 type User {
@@ -16,27 +35,7 @@ type User {
 
 type UserProfile {
   id: String!
+  email: String!
   createdAt: String!
   updatedAt: String!
-  email: String!
-}
-
-type Return {
-  message: String
-}
-
-type Mutation {
-  createAccessToken(refreshToken: String!): TokenModel
-  createUser(email: String!, password: String!): Return!
-  login(email: String!, password: String!): TokenModel!
-}
-
-type TokenModel {
-  accessToken: String!
-  refreshToken: String
-}
-
-type Query {
-  fetchMe: UserProfile!
-  fetchUser(userId: String!): UserProfile!
 }

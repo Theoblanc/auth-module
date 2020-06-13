@@ -1,25 +1,25 @@
-version: "3.3"
+version: '3.3'
 
 services:
-  backend:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    volumes:
-      - ./src:/backend/src
-    ports:
-      - 4000:4000
-    env_file:
-      - ./.env.dev
-    # command: "npm run prod"
-    links:
-      - postgres
+  # backend:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   volumes:
+  #     - ./src:/backend/src
+  #   ports:
+  #     - 4000:4000
+  #   env_file:
+  #     - ./.env.dev
+  #   # command: "npm run prod"
+  #   links:
+  #     - postgres
 
   postgres:
     image: postgres:11
     environment:
-      POSTGRES_PASSWORD: "1234"
-      POSTGRES_USER: Theo
-
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
     ports:
       - 5432:5432

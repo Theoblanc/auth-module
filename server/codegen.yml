@@ -11,8 +11,8 @@ generates:
       afterAllFileWrite:
         - eslint --fix
     plugins:
-      - "typescript"
-      - "typescript-resolvers"
+      - 'typescript'
+      - 'typescript-resolvers'
     config:
       useIndexSignature: true
       typesPrefix: I

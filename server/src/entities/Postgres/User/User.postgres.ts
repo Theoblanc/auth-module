@@ -4,25 +4,23 @@ import {
   CreateDateColumn,
   Entity,
   PrimaryGeneratedColumn,
-  UpdateDateColumn,
-  OneToOne,
-} from "typeorm";
-import Token from "../Token/Token.postgres";
+  UpdateDateColumn
+} from 'typeorm';
 
 enum Role {
-  REGULAR = "REGULAR",
-  ADMIN = "ADMIN",
+  REGULAR = 'REGULAR',
+  ADMIN = 'ADMIN'
 }
 
 @Entity()
 class User extends BaseEntity {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn('uuid')
   id!: string;
 
-  @Column({ type: "text", unique: true })
+  @Column({ type: 'text', unique: true })
   email!: string;
 
-  @Column({ type: "text" })
+  @Column({ type: 'text' })
   password!: string;
 
   @CreateDateColumn()

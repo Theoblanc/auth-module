@@ -5,24 +5,24 @@ import {
   UpdateDateColumn,
   Column,
   OneToOne,
-  Entity,
-} from "typeorm";
+  Entity
+} from 'typeorm';
 
 @Entity()
 class Token extends BaseEntity {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn('uuid')
   id!: string;
 
-  @Column({ type: "timestamp" })
+  @Column({ type: 'timestamp' })
   accessedAt!: Date;
 
-  @OneToOne("User")
+  @OneToOne('User')
   userId!: string;
 
-  @CreateDateColumn({ type: "timestamp" })
+  @CreateDateColumn({ type: 'timestamp' })
   createdAt!: Date;
 
-  @UpdateDateColumn({ type: "timestamp" })
+  @UpdateDateColumn({ type: 'timestamp' })
   updatedAt!: Date;
 }
 

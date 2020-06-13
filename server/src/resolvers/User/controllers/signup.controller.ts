@@ -1,16 +1,20 @@
-import { IMutationResolvers } from "src/types/graphql";
-import User from "src/entities/Postgres/User/User.postgres";
-import { getComparedPassword, getHashedPassword } from "src/libraries/security";
-import authorizations from "src/libraries/authorization";
+import { IMutationResolvers } from 'src/types/graphql';
+import User from 'src/entities/Postgres/User/User.postgres';
+import { getHashedPassword } from 'src/libraries/security';
 
-const signupController: IMutationResolvers["signup"] = async (_, args, ctx) => {
+const signUpController: IMutationResolvers['signUp'] = async (_, args, ctx) => {
   const { email, password } = args;
-  const user = await User.findOne({ where: { email } });
-  if (user) throw new Error("Email is already exists");
+  try {
+    const user = await User.findOne({ where: { email } });
+    if (user) throw new Error('Email is already exists');
 
-  const hashedPassword = await getHashedPassword(password);
-  await User.create({ email, password: hashedPassword }).save();
-  return { message: "" };
+    const hashedPassword = await getHashedPassword(password);
+    await User.create({ email, password: hashedPassword }).save();
+  } catch (error) {
+    throw new Error();
+  }
+
+  return { message: '' };
 };
 
-export default signupController;
+export default signUpController;
