@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "pretypes": "gql-merge ./src/schemas/**/*.graphql ./src/entities/**/*.graphql > ./src/types/graph.d.graphql",
+    "pretypes": "gql-merge ./src/resolvers/**/*.graphql ./src/entities/**/*.graphql > ./src/types/graph.d.graphql",
     "types": "graphql-to-typescript ./src/types/graph.d.graphql ./src/types/graph.d.ts",
     "predev": "npm run types",
     "preprod": "npm run types",

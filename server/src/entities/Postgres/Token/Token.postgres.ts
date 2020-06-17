@@ -11,9 +11,14 @@ import { User } from "src/types/graph";
 
 @Entity()
 class Token extends BaseEntity {
-  @PrimaryGeneratedColumn("uuid") id!: string;
-  @CreateDateColumn({ type: "timestamp" }) createdAt!: Date;
-  @UpdateDateColumn({ type: "timestamp" }) updatedAt!: Date;
+  @PrimaryGeneratedColumn("uuid")
+  id!: string;
+
+  @CreateDateColumn({ type: "timestamp" })
+  createdAt!: Date;
+
+  @UpdateDateColumn({ type: "timestamp" })
+  updatedAt!: Date;
 
   @Column({ type: "timestamp" })
   accessedAt!: Date;
