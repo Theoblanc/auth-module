@@ -1,0 +1,5 @@
+const SUCCESS = {
+  COMMON: {
+    SOMETHING: "성공하였습니다.",
+  },
+};

@@ -20,8 +20,10 @@ const server = new ApolloServer({
   schema: applyMiddleware(makeExecutableSchema({ typeDefs, resolvers })),
 });
 server.applyMiddleware({ app });
-createConnection(connectionOptions).then(() => {
-  app.listen({ port: PORT }, () =>
-    console.log(`listening - http://${HOST}:${PORT}${server.graphqlPath}`)
-  );
-});
+createConnection(connectionOptions)
+  .then(() => {
+    app.listen({ port: PORT }, () =>
+      console.log(`listening - http://${HOST}:${PORT}${server.graphqlPath}`)
+    );
+  })
+  .catch((error) => console.log(error));
