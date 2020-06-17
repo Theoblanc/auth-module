@@ -4,6 +4,6 @@ RUN mkdir backend
 WORKDIR /backend
 
 COPY . /backend/
-RUN npm install && npm cache clean --force
+RUN yarn && yarn cache clean --force
 
-CMD npm run dev
+CMD yarn dev

@@ -2,7 +2,7 @@ import React from "react";
 import LoginPresenter from "./LoginPresenter";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@apollo/react-hooks";
-import { LOGIN_USER } from "./LoginQueries";
+import { LOGIN_USER } from "../../../graphql/queries/LoginQueries";
 
 const LoginContainer: React.FC = () => {
   const { register, handleSubmit } = useForm();

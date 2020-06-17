@@ -1,12 +1,9 @@
-import { Resolvers } from "src/types/resolvers";
-import { createAccessToken } from "src/libraries/security";
+import createAccessTokenController from "./controllers/createAccessToken.controller";
+import { IResolvers } from "src/types/graphql";
 
-const resolvers: Resolvers = {
+const resolvers: IResolvers = {
   Mutation: {
-    createAccessToken: async (parent, { refreshToken }, ctx) => {
-      const accessToken = await createAccessToken(refreshToken, ctx.res);
-      return { accessToken };
-    },
+    createAccessToken: createAccessTokenController,
   },
 };
 
