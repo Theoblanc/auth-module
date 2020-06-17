@@ -1,12 +1,15 @@
 import { IMutationResolvers } from "src/types/graphql";
-import { createAccessToken } from "src/libraries/security";
+import authorizations from "src/libraries/authorization";
 
 const createAccessTokenController: IMutationResolvers["createAccessToken"] = async (
   parent,
   { refreshToken },
   ctx
 ): Promise<{ accessToken: string }> => {
-  const accessToken = await createAccessToken(refreshToken, ctx.res);
+  const accessToken = await authorizations().createAccessToken(
+    refreshToken,
+    ctx.res
+  );
   return { accessToken };
 };
 

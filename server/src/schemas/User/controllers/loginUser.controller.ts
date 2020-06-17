@@ -1,10 +1,7 @@
-import {
-  getComparedPassword,
-  createRefreshToken,
-  createAccessToken,
-} from "src/libraries/security";
 import User from "src/entities/Postgres/User/User.postgres";
 import { IMutationResolvers, ITokenModel } from "src/types/graphql";
+import { getComparedPassword } from "src/libraries/security";
+import authorizations from "src/libraries/authorization";
 
 const loginUserController: IMutationResolvers["loginUser"] = async (
   _,
@@ -16,8 +13,11 @@ const loginUserController: IMutationResolvers["loginUser"] = async (
   if (!user) throw new Error("Email is not exists");
   await getComparedPassword(password, user.password);
 
-  const refreshToken = await createRefreshToken(user.id);
-  const accessToken = await createAccessToken(refreshToken, ctx.res);
+  const refreshToken = await authorizations().createRefreshToken(user.id);
+  const accessToken = await authorizations().createAccessToken(
+    refreshToken,
+    ctx.res
+  );
   return { accessToken, refreshToken };
 };
 
