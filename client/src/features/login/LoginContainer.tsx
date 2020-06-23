@@ -1,8 +1,9 @@
 import React from "react";
-import LoginPresenter from "./LoginPresenter";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@apollo/react-hooks";
+import LoginPresenter from "./LoginPresenter";
 import { LOGIN_USER } from "../../../graphql/queries/LoginQueries";
+import cookie from "js-cookie";
 
 const LoginContainer: React.FC = () => {
   const { register, handleSubmit } = useForm();
@@ -11,20 +12,20 @@ const LoginContainer: React.FC = () => {
   const onSubmit = async (data: any) => {
     const variables = {
       email: data.email,
-      password: data.password,
+      password: data.password
     };
 
     try {
       const {
         data: {
-          loginUser: { accessToken, refreshToken },
-        },
+          loginUser: { accessToken, refreshToken }
+        }
       } = await loginMutation({ variables });
 
-      //session으로 바꾸자
+      // session으로 바꾸자
 
-      localStorage.setItem("accessToken", accessToken);
-      localStorage.setItem("refreshToken", refreshToken);
+      cookie.set("accessToken", accessToken);
+      cookie.set("refreshToken", refreshToken);
     } catch (e) {
       console.log(e);
     }

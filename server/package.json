@@ -9,6 +9,7 @@
     "predev": "npm run types",
     "preprod": "npm run types",
     "dev": "nodemon --exec ts-node ./src/server.ts -e ts,graphql",
+    "test": "jest",
     "prod": "ts-node ./src/server.ts",
     "lint": "tsc --noEmit && eslint 'src/**/*.ts{x,}' --fix --quiet && prettier-check --ignore-path .gitignore \"{.,src/**}/{*.ts{x,},*.md,ts*.json,*.config.js}\""
   },
@@ -34,19 +35,24 @@
     "typeorm": "^0.2.22"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.10.2",
+    "@babel/preset-react": "^7.10.1",
     "@types/app-module-path": "^2.2.0",
     "@types/bcryptjs": "^2.4.2",
     "@types/cors": "^2.8.6",
     "@types/jsonwebtoken": "^8.3.6",
     "@types/morgan": "^1.7.37",
     "@types/node": "^13.1.8",
+    "babel-jest": "^26.0.1",
     "eslint": "6.8.0",
     "eslint-config-airbnb": "18.1.0",
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "2.5.0",
+    "jest": "^26.0.1",
     "pg": "^7.17.1",
+    "react-test-renderer": "^16.13.1",
     "ts-node": "^8.6.2",
     "typescript": "^3.7.5"
   }
