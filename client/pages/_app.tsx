@@ -8,6 +8,8 @@ import Head from "next/head";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import App from "next/app";
 import GlobalStyle from "../styles/Globalstyles";
+import cookie from "js-cookie";
+import getConfig from "next/config";
 
 class MyApp extends App<any> {
   public render() {
@@ -27,35 +29,42 @@ class MyApp extends App<any> {
   }
 }
 
-MyApp.getInitialProps = async (appContext) => {
+MyApp.getInitialProps = async appContext => {
   const appProps = await App.getInitialProps(appContext);
   console.log("appProps", appProps);
   return { ...appProps };
 };
 
 export default withApollo(({ initialState }) => {
+  const {
+    NEXT_PUBLIC_BACKEND_HOST,
+    NEXT_PUBLIC_BACKEND_PORT,
+    NEXT_PUBLIC_BACKEND_GRAPHQL_ENDPOINT
+  } = getConfig().publicRuntimeConfig;
   console.log("initialState", initialState);
   const httpLink = createHttpLink({
-    uri: "http://localhost:4000/graphql",
+    uri: `http://${NEXT_PUBLIC_BACKEND_HOST}:${NEXT_PUBLIC_BACKEND_PORT}/${NEXT_PUBLIC_BACKEND_GRAPHQL_ENDPOINT}`,
     fetch,
-    credentials: "same-origin",
-    // 'include' 변경 후 검토필요 // Additional fetch() options like `credentials` or `headers`
+    credentials: "same-origin"
   });
 
   const authLink = setContext((_, { headers }) => {
+    const accessToken = cookie.get("accessToken");
+    const refreshToken = cookie.get("refreshToken");
+
     // get the authentication token from local storage if it exists
     // return the headers to the context so httpLink can read them
     return {
       headers: {
         ...headers,
-        // authorization:  `Bearer ${token}` : "",
-      },
+        authorization: accessToken ? `Bearer ${accessToken}` : ""
+      }
     };
   });
 
   return new ApolloClient({
     link: authLink.concat(httpLink),
     cache: new InMemoryCache().restore(initialState || {}),
-    ssrMode: true,
+    ssrMode: true
   });
 })(MyApp);

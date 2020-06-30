@@ -1,5 +1,5 @@
 import React from "react";
-import { LoginWrapper, Icon } from "./LoginStyles";
+import { LoginWrapper, Icon } from "./Login.styled";
 
 interface IProps {
   onSubmit: Function;

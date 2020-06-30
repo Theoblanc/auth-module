@@ -1,9 +1,9 @@
 FROM node:10.15.0
 
-RUN mkdir backend
-WORKDIR /backend
+RUN mkdir server
+WORKDIR /server
 
-COPY . /backend/
+COPY . /server/
 RUN yarn && yarn cache clean --force
 
 CMD yarn dev
