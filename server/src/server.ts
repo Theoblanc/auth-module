@@ -26,4 +26,4 @@ createConnection(connectionOptions)
       console.log(`listening - http://${HOST}:${PORT}${server.graphqlPath}`)
     );
   })
-  .catch((error) => console.log(error));
+  .catch((error) => console.log("error", error));

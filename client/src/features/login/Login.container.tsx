@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@apollo/react-hooks";
-import LoginPresenter from "./LoginPresenter";
+import LoginPresenter from "./Login.presenter";
 import { LOGIN_USER } from "../../../graphql/queries/LoginQueries";
 import cookie from "js-cookie";
 
@@ -21,8 +21,6 @@ const LoginContainer: React.FC = () => {
           loginUser: { accessToken, refreshToken }
         }
       } = await loginMutation({ variables });
-
-      // session으로 바꾸자
 
       cookie.set("accessToken", accessToken);
       cookie.set("refreshToken", refreshToken);

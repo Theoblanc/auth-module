@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ./src:/backend/src
+      - ./src:/server/src
     ports:
       - 4000:4000
     env_file:
@@ -16,7 +16,7 @@ services:
       - postgres
 
   postgres:
-    image: postgres:11
+    image: postgres:12.3
     environment:
       POSTGRES_PASSWORD: "1234"
     ports:

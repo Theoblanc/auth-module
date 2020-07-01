@@ -11,7 +11,7 @@ const connectionOptions: ConnectionOptions = {
   password: String(process.env.DATABASE_PASSWORD),
   entities: DATABASE_ENTITIES,
   synchronize: true,
-  logging: true
+  logging: true,
 };
 
 export default connectionOptions;

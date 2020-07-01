@@ -6,7 +6,7 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "test": "jest",
+    "test": "jest --config ./jest.config.js",
     "lint": "tsc --noEmit && eslint 'src/**/*.ts{x,}' --fix --quiet && prettier-check --ignore-path .gitignore \"{.,src/**}/{*.ts{x,},*.md,ts*.json,*.config.js}\""
   },
   "keywords": [],
@@ -62,6 +62,7 @@
     "jest": "^26.0.1",
     "js-cookie": "^2.2.1",
     "react-test-renderer": "^16.13.1",
+    "ts-jest": "^26.1.1",
     "typescript": "^3.8.3"
   }
 }
