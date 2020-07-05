@@ -1,15 +1,9 @@
 import React from "react";
-import { LoginWrapper, Icon } from "./Login.styled";
+import { SignUpWrapper, Icon } from "./SignUp.styled";
 
-interface IProps {
-  onSubmit: Function;
-  register: any;
-  handleSubmit: Function;
-}
-
-const LoginPresenter: React.FC<IProps> = ({ register, handleSubmit, onSubmit }) => {
+const SignUpPresenter = ({ register, handleSubmit, onSubmit }) => {
   return (
-    <LoginWrapper>
+    <SignUpWrapper>
       <div>
         <Icon src='/images/logo512.png' alt='react' />
       </div>
@@ -47,8 +41,8 @@ const LoginPresenter: React.FC<IProps> = ({ register, handleSubmit, onSubmit }) 
 
         <button type='submit'>로그인</button>
       </form>
-    </LoginWrapper>
+    </SignUpWrapper>
   );
 };
 
-export default LoginPresenter;
+export default SignUpPresenter;

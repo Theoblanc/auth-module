@@ -10,10 +10,12 @@ import App from "next/app";
 import GlobalStyle from "../styles/Globalstyles";
 import cookie from "js-cookie";
 import getConfig from "next/config";
+import React, { Fragment } from "react";
 
 class MyApp extends App<any> {
   public render() {
     const { Component, pageProps, apollo } = this.props;
+    const Layout: React.FC = Component.layout || Fragment;
 
     return (
       <>
@@ -22,7 +24,9 @@ class MyApp extends App<any> {
         </Head>
         <ApolloProvider client={apollo}>
           <GlobalStyle />
-          <Component {...pageProps} />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
         </ApolloProvider>
       </>
     );

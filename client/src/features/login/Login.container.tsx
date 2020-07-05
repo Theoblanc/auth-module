@@ -2,7 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@apollo/react-hooks";
 import LoginPresenter from "./Login.presenter";
-import { LOGIN_USER } from "../../../graphql/queries/LoginQueries";
+import { LOGIN_USER } from "../../../graphql/mutations/LoginQueries";
 import cookie from "js-cookie";
 
 const LoginContainer: React.FC = () => {
