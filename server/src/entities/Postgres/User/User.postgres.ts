@@ -6,6 +6,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
+import { IRole } from "src/types/graphql";
 
 enum Role {
   REGULAR = "REGULAR",
@@ -28,7 +29,7 @@ class User extends BaseEntity {
   password!: string;
 
   @Column({ type: "enum", enum: Role, default: Role.REGULAR })
-  role!: Role;
+  role!: IRole;
 }
 
 export default User;

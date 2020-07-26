@@ -1,7 +1,7 @@
 import createAccessTokenController from "./controllers/createAccessToken.controller";
-import { IResolvers } from "src/types/graphql";
+// import { IResolvers } from "src/types/graphql";
 
-const resolvers: IResolvers = {
+const resolvers = {
   Mutation: {
     createAccessToken: createAccessTokenController,
   },

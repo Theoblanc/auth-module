@@ -4,14 +4,13 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "pretypes": "gql-merge ./src/resolvers/**/*.graphql ./src/entities/**/*.graphql > ./src/types/graph.d.graphql",
-    "types": "graphql-to-typescript ./src/types/graph.d.graphql ./src/types/graph.d.ts",
-    "predev": "npm run types",
-    "preprod": "npm run types",
+    "types": "npm run generate",
+    "predev": "npm run generate",
+    "preprod": "npm run generate",
     "dev": "nodemon --exec ts-node ./src/server.ts -e ts,graphql",
     "test": "jest",
-    "prod": "ts-node ./src/server.ts",
-    "lint": "tsc --noEmit && eslint 'src/**/*.ts{x,}' --fix --quiet && prettier-check --ignore-path .gitignore \"{.,src/**}/{*.ts{x,},*.md,ts*.json,*.config.js}\""
+    "lint": "tsc --noEmit && eslint 'src/**/*.ts{x,}' --fix --quiet && prettier-check --ignore-path .gitignore \"{.,src/**}/{*.ts{x,},*.md,ts*.json,*.config.js}\"",
+    "generate": "graphql-codegen --config codegen.yml"
   },
   "author": "",
   "license": "ISC",
@@ -37,6 +36,13 @@
   "devDependencies": {
     "@babel/preset-env": "^7.10.2",
     "@babel/preset-react": "^7.10.1",
+    "@graphql-codegen/cli": "1.17.0",
+    "@graphql-codegen/introspection": "1.17.0",
+    "@graphql-codegen/schema-ast": "^1.17.0",
+    "@graphql-codegen/typescript": "^1.17.0",
+    "@graphql-codegen/typescript-operations": "1.17.0",
+    "@graphql-codegen/typescript-react-apollo": "1.17.0",
+    "@graphql-codegen/typescript-resolvers": "^1.17.0",
     "@types/app-module-path": "^2.2.0",
     "@types/bcryptjs": "^2.4.2",
     "@types/cors": "^2.8.6",

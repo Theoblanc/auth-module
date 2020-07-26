@@ -7,7 +7,6 @@ import {
   OneToOne,
   Entity,
 } from "typeorm";
-import { User } from "src/types/graph";
 
 @Entity()
 class Token extends BaseEntity {

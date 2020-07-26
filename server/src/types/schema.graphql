@@ -1,6 +1,6 @@
 type Mutation {
   createAccessToken(refreshToken: String!): TokenModel
-  createUser(email: String!, password: String!): Result!
+  createUser(email: String!, password: String!): Result
   loginUser(email: String!, password: String!): TokenModel!
 }
 

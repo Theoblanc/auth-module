@@ -6,5 +6,5 @@ type Query {
 type Mutation {
   # User
   loginUser(email: String!, password: String!): TokenModel!
-  createUser(email: String!, password: String!): Result!
+  createUser(email: String!, password: String!): Result
 }
