@@ -1,7 +1,7 @@
 import fs from "fs";
 import jwt from "jsonwebtoken";
 import Token from "src/entities/Postgres/Token/Token.postgres";
-import { Response, Request } from "express";
+import { Response } from "express";
 
 interface Authorizations {
   getAccessTokenFromHeader(context: any): Promise<string>;
@@ -43,11 +43,9 @@ function authorizations(): Authorizations {
         new Date().getTime() >
         new Date(refreshToken.updatedAt).getTime() + twoHour;
       if (isExpired) throw new Error();
-      await Token.update(
-        { id: jWtResfreshToken.jti },
-        { updatedAt: new Date() }
-      );
-
+      const token = await Token.findOneOrFail({ id: jWtResfreshToken.jti });
+      token.updatedAt = new Date();
+      token.save();
       const accessToken = await jwt.sign(
         { id: jWtResfreshToken.id },
         PRIVATE_KEY,
