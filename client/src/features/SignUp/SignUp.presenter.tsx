@@ -1,11 +1,16 @@
 import React from "react";
 import { SignUpWrapper, Icon } from "./SignUp.styled";
+interface IProps {
+  onSubmit: Function;
+  register: any;
+  handleSubmit: Function;
+}
 
-const SignUpPresenter = ({ register, handleSubmit, onSubmit }) => {
+const SignUpPresenter: React.FC<IProps> = ({ register, handleSubmit, onSubmit }) => {
   return (
     <SignUpWrapper>
       <div>
-        <Icon src='/images/logo512.png' alt='react' />
+        <div>회원가입</div>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
@@ -13,7 +18,7 @@ const SignUpPresenter = ({ register, handleSubmit, onSubmit }) => {
             아이디
             <input
               type='text'
-              placeholder='login'
+              placeholder='signup'
               id='email'
               name='email'
               ref={register}
@@ -35,11 +40,7 @@ const SignUpPresenter = ({ register, handleSubmit, onSubmit }) => {
             />
           </label>
         </div>
-        <div>
-          <a href='signUp'>회원가입</a>
-        </div>
-
-        <button type='submit'>로그인</button>
+        <button type='submit'>회원가입</button>
       </form>
     </SignUpWrapper>
   );

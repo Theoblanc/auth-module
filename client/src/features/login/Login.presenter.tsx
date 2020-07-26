@@ -42,7 +42,7 @@ const LoginPresenter: React.FC<IProps> = ({ register, handleSubmit, onSubmit }) 
           </label>
         </div>
         <div>
-          <a href='signUp'>회원가입</a>
+          <a href='register'>회원가입</a>
         </div>
 
         <button type='submit'>로그인</button>

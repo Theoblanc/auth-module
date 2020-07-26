@@ -9,7 +9,7 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import App from "next/app";
 import GlobalStyle from "../styles/Globalstyles";
 import cookie from "js-cookie";
-import getConfig from "next/config";
+// import getConfig from "next/config";
 import React, { Fragment } from "react";
 
 class MyApp extends App<any> {
@@ -21,6 +21,7 @@ class MyApp extends App<any> {
       <>
         <Head>
           <title>로그인 모듈</title>
+          <script>window.__APOLLO_STATE__ = JSON.stringify(client.extract());</script>
         </Head>
         <ApolloProvider client={apollo}>
           <GlobalStyle />
@@ -35,26 +36,20 @@ class MyApp extends App<any> {
 
 MyApp.getInitialProps = async appContext => {
   const appProps = await App.getInitialProps(appContext);
-  console.log("appProps", appProps);
   return { ...appProps };
 };
 
 export default withApollo(({ initialState }) => {
-  const {
-    NEXT_PUBLIC_BACKEND_HOST,
-    NEXT_PUBLIC_BACKEND_PORT,
-    NEXT_PUBLIC_BACKEND_GRAPHQL_ENDPOINT
-  } = getConfig().publicRuntimeConfig;
-  console.log("initialState", initialState);
   const httpLink = createHttpLink({
-    uri: `http://${NEXT_PUBLIC_BACKEND_HOST}:${NEXT_PUBLIC_BACKEND_PORT}/${NEXT_PUBLIC_BACKEND_GRAPHQL_ENDPOINT}`,
+    uri: "http://localhost:4000/graphql",
     fetch,
     credentials: "same-origin"
   });
 
   const authLink = setContext((_, { headers }) => {
     const accessToken = cookie.get("accessToken");
-    const refreshToken = cookie.get("refreshToken");
+
+    // const refreshToken = cookie.get("refreshToken");
 
     // get the authentication token from local storage if it exists
     // return the headers to the context so httpLink can read them
@@ -68,7 +63,6 @@ export default withApollo(({ initialState }) => {
 
   return new ApolloClient({
     link: authLink.concat(httpLink),
-    cache: new InMemoryCache().restore(initialState || {}),
-    ssrMode: true
+    cache: new InMemoryCache()
   });
 })(MyApp);

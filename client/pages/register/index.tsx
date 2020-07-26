@@ -2,8 +2,8 @@ import React from "react";
 import Layout from "../../src/components/Layout";
 import SignUpFeature from "../../src/features/SignUp";
 
-const SignupPage = () => <SignUpFeature />;
+const SignUpPage = () => <SignUpFeature />;
 
-SignupPage.layout = Layout;
+SignUpPage.layout = Layout;
 
-export default SignupPage;
+export default SignUpPage;

@@ -27,8 +27,6 @@ const LoginContainer: React.FC = () => {
     } catch (e) {
       console.log(e);
     }
-
-    console.log(data);
   };
 
   return <LoginPresenter onSubmit={onSubmit} register={register} handleSubmit={handleSubmit} />;

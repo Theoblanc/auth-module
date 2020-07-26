@@ -3,14 +3,14 @@ import SignUpPresenter from "./SignUp.presenter";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@apollo/react-hooks";
 import { CREATE_USER } from "../../../graphql/mutations/SignupQueries";
+import Router from "next/router";
 
-const SignUpContainer = () => {
+const SignUpContainer: React.FC = () => {
   const { register, handleSubmit } = useForm();
+  const [signupMutation] = useMutation(CREATE_USER);
 
-  const onSubmit = async ({ data }) => {
+  const onSubmit = async data => {
     console.log("data", data);
-    const [signupMutation] = useMutation(CREATE_USER);
-
     try {
       await signupMutation({
         variables: {
@@ -18,6 +18,7 @@ const SignUpContainer = () => {
           password: data?.password
         }
       });
+      Router.push("/");
     } catch (error) {
       console.log(error);
     }

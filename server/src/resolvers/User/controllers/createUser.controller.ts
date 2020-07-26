@@ -9,13 +9,11 @@ const createUserController: IMutationResolvers["createUser"] = async (
   ctx
 ): Promise<IResult | null> => {
   const { email, password } = args;
-  console.log("args", args);
-  console.log("email ", email);
-  console.log("password ", password);
 
   try {
     const user = await User.findOne({ where: { email } });
     if (user) throw new Error("Email is already exists");
+    console.log("user", user);
 
     const hashedPassword = await getHashedPassword(password);
     await User.create({ email, password: hashedPassword }).save();
