@@ -4,6 +4,7 @@ import { useMutation } from "@apollo/react-hooks";
 import LoginPresenter from "./Login.presenter";
 import { LOGIN_USER } from "../../../graphql/mutations/LoginQueries";
 import cookie from "js-cookie";
+import Router from "next/router";
 
 const LoginContainer: React.FC = () => {
   const { register, handleSubmit } = useForm();
@@ -24,6 +25,7 @@ const LoginContainer: React.FC = () => {
 
       cookie.set("accessToken", accessToken);
       cookie.set("refreshToken", refreshToken);
+      Router.push("/main");
     } catch (e) {
       console.log(e);
     }

@@ -21,7 +21,7 @@ class MyApp extends App<any> {
       <>
         <Head>
           <title>로그인 모듈</title>
-          <script>window.__APOLLO_STATE__ = JSON.stringify(client.extract());</script>
+          <script>window.__APOLLO_STATE__ = JSON.stringify();</script>
         </Head>
         <ApolloProvider client={apollo}>
           <GlobalStyle />
@@ -46,10 +46,10 @@ export default withApollo(({ initialState }) => {
     credentials: "same-origin"
   });
 
-  const authLink = setContext((_, { headers }) => {
+  const authLink = setContext(async (_, { headers }) => {
     const accessToken = cookie.get("accessToken");
-
-    // const refreshToken = cookie.get("refreshToken");
+    const refreshToken = cookie.get("refreshToken");
+    // const token = await checkExpiredToken(accessToken, refreshToken);
 
     // get the authentication token from local storage if it exists
     // return the headers to the context so httpLink can read them
