@@ -38,7 +38,7 @@ function authorizations(): Authorizations {
       const refreshToken = await Token.findOne({ id: jWtResfreshToken.jti });
       if (!refreshToken) throw new Error();
 
-      const twoHour = 2 * 60 * 60 * 1000;
+      const twoHour = 2 * 60 * 1000; // 고침
       const isExpired =
         new Date().getTime() >
         new Date(refreshToken.updatedAt).getTime() + twoHour;

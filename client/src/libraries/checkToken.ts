@@ -10,6 +10,7 @@ export async function checkExpiredToken(accessToken: string, refreshToken: strin
 
   //만료된 예상 시간 보다 1분 앞선 시간이 현재시간보다 더 크면 만료 요청
   const isExpired = new Date().getTime() > new Date(decoded.exp * 1000).getTime();
+  console.log("isExpired", isExpired);
   if (!isExpired) return { accessToken, refreshToken };
 
   //만료 되었다면

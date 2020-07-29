@@ -11,6 +11,7 @@ import GlobalStyle from "../styles/Globalstyles";
 import cookie from "js-cookie";
 // import getConfig from "next/config";
 import React, { Fragment } from "react";
+import { checkExpiredToken } from "../src/libraries/checkToken";
 
 class MyApp extends App<any> {
   public render() {
@@ -46,16 +47,18 @@ export default withApollo(({ initialState }) => {
     credentials: "same-origin"
   });
 
-  const authLink = setContext(async (_, { headers }) => {
+  const authLink = setContext(async (_, ctx) => {
     const accessToken = cookie.get("accessToken");
     const refreshToken = cookie.get("refreshToken");
-    // const token = await checkExpiredToken(accessToken, refreshToken);
+    const token = await checkExpiredToken(accessToken, refreshToken);
+
+    console.log("token", token );
 
     // get the authentication token from local storage if it exists
     // return the headers to the context so httpLink can read them
     return {
       headers: {
-        ...headers,
+        ...ctx.headers,
         authorization: accessToken ? `Bearer ${accessToken}` : ""
       }
     };
