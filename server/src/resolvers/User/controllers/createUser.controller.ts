@@ -10,6 +10,8 @@ const createUserController: IMutationResolvers["createUser"] = async (
 ): Promise<IResult | null> => {
   const { email, password } = args;
 
+  console.log("id", email, password)
+
   try {
     const user = await User.findOne({ where: { email } });
     if (user) throw new Error("Email is already exists");

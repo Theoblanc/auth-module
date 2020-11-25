@@ -30,7 +30,7 @@ export async function checkExpiredToken(accessToken: string, refreshToken: strin
       { headers: { "Content-Type": "application/json" } }
     );
 
-    const { accessToken } = response?.data?.data?.restoreAccessToken;
+    const { accessToken } = response?.data?.restoreAccessToken;
 
     if (accessToken) {
       cookie.set("accessToken", accessToken);

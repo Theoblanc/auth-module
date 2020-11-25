@@ -4,10 +4,6 @@ import cookie from "js-cookie";
 import Router from "next/router";
 
 const LayoutContainer: React.FC = ({ children }: any) => {
-  const token = cookie.get("accessToken");
-  if (token) {
-    Router.push("/");
-  }
 
   return <LayoutPresenter>{children}</LayoutPresenter>;
 };

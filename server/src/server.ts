@@ -11,8 +11,9 @@ import { typeDefs, resolvers, context } from "src/libraries/configApollo";
 import { applyMiddleware } from "graphql-middleware";
 import connectionOptions from "src/libraries/configTypeorm";
 
-const HOST = process.env.BACKEND_HOST;
-const PORT = process.env.BACKEND_PORT;
+const HOST = process.env.BACKEND_HOST || "localhost" ;
+const PORT = process.env.BACKEND_PORT || 4000;
+
 
 const app = express();
 const server = new ApolloServer({
@@ -20,6 +21,7 @@ const server = new ApolloServer({
   schema: applyMiddleware(makeExecutableSchema({ typeDefs, resolvers })),
 });
 server.applyMiddleware({ app });
+
 createConnection(connectionOptions)
   .then(() => {
     app.listen({ port: PORT }, () =>

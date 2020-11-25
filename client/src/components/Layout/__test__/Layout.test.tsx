@@ -6,7 +6,7 @@ describe("[Layout render]", () => {
   const container = renderer.create(<Layout></Layout>).toJSON();
   console.log(container);
 
-  it("[should be renser", () => {
+  it("[should be render", () => {
     expect(container).toMatchSnapshot();
   });
 });

@@ -52,7 +52,7 @@ export default withApollo(({ initialState }) => {
     const refreshToken = cookie.get("refreshToken");
     const token = await checkExpiredToken(accessToken, refreshToken);
 
-    console.log("token", token );
+    // console.log("token", token );
 
     // get the authentication token from local storage if it exists
     // return the headers to the context so httpLink can read them

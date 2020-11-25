@@ -12,12 +12,14 @@ const SignUpContainer: React.FC = () => {
   const onSubmit = async data => {
     console.log("data", data);
     try {
-      await signupMutation({
+      const result = await signupMutation({
         variables: {
           email: data?.email,
           password: data?.password
         }
       });
+
+      console.log(result)
       Router.push("/");
     } catch (error) {
       console.log(error);

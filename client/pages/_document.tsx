@@ -1,4 +1,4 @@
-import Document, { Head, Main, NextScript } from "next/document";
+import Document, { Html, Head, Main, NextScript } from "next/document";
 import React from "react";
 
 interface IProps {
@@ -12,13 +12,13 @@ export default class MyDocument extends Document<IProps> {
 
   render() {
     return (
-      <html lang='ko'>
+      <Html lang='ko'>
         <Head>{this.props.styleTags}</Head>
         <body>
           <Main />
           <NextScript />
         </body>
-      </html>
+      </Html>
     );
   }
 }

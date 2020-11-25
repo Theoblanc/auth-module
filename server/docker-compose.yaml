@@ -1,23 +1,24 @@
-version: "3.3"
+version: "3.8"
 
 services:
   backend:
     build:
       context: .
       dockerfile: Dockerfile
+
     volumes:
       - ./src:/server/src
     ports:
       - 4000:4000
     env_file:
       - ./.env.dev
-    # command: "npm run prod"
     links:
       - postgres
-
   postgres:
-    image: postgres:12.3
+    image: postgres:12
     environment:
+      POSTGRES_USERNAME: "postgres"
+      POSTGRES_DB: "postgres"
       POSTGRES_PASSWORD: "1234"
     ports:
       - 5432:5432
