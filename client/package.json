@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "test": "jest --config ./jest.config.js",
-    "lint": "tsc --noEmit && eslint 'src/**/*.ts{x,}' --fix --quiet && prettier-check --ignore-path .gitignore \"{.,src/**}/{*.ts{x,},*.md,ts*.json,*.config.js}\""
+    "lint": "tsc --noEmit && eslint \"src/**/*.ts{x,}\" --fix --quiet && prettier-check --ignore-path .gitignore \"{.,src/**}/{*.ts{x,},*.md,ts*.json,*.config.js}\""
   },
   "keywords": [],
   "author": "",

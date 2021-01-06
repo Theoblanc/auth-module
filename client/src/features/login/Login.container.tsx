@@ -1,10 +1,10 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@apollo/react-hooks";
-import LoginPresenter from "./Login.presenter";
-import { LOGIN_USER } from "../../../graphql/mutations/LoginQueries";
 import cookie from "js-cookie";
 import Router from "next/router";
+import LoginPresenter from "./Login.presenter";
+import { LOGIN_USER } from "../../../graphql/mutations/LoginQueries";
 
 const LoginContainer: React.FC = () => {
   const { register, handleSubmit } = useForm();

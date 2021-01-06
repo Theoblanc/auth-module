@@ -1,5 +1,6 @@
 import React from "react";
-import { SignUpWrapper, Icon } from "./SignUp.styled";
+import { SignUpWrapper } from "./SignUp.styled";
+
 interface IProps {
   onSubmit: Function;
   register: any;

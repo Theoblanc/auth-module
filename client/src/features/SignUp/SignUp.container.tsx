@@ -1,9 +1,9 @@
 import React from "react";
-import SignUpPresenter from "./SignUp.presenter";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@apollo/react-hooks";
-import { CREATE_USER } from "../../../graphql/mutations/SignupQueries";
 import Router from "next/router";
+import { CREATE_USER } from "../../../graphql/mutations/SignupQueries";
+import SignUpPresenter from "./SignUp.presenter";
 
 const SignUpContainer: React.FC = () => {
   const { register, handleSubmit } = useForm();
@@ -19,7 +19,7 @@ const SignUpContainer: React.FC = () => {
         }
       });
 
-      console.log(result)
+      console.log(result);
       Router.push("/");
     } catch (error) {
       console.log(error);

@@ -27,7 +27,6 @@ const LoginPresenter: React.FC<IProps> = ({ register, handleSubmit, onSubmit }) 
             />
           </label>
         </div>
-
         <div>
           <label htmlFor='password'>
             비밀번호
@@ -44,8 +43,9 @@ const LoginPresenter: React.FC<IProps> = ({ register, handleSubmit, onSubmit }) 
         <div>
           <a href='register'>회원가입</a>
         </div>
-
         <button type='submit'>로그인</button>
+        <button type='submit'>구글 로그인</button>
+        <button type='submit'>페이스북 로그인</button>
       </form>
     </LoginWrapper>
   );

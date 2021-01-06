@@ -13,6 +13,11 @@ import cookie from "js-cookie";
 import React, { Fragment } from "react";
 import { checkExpiredToken } from "../src/libraries/checkToken";
 
+interface TokenType {
+  accessToken: string;
+  refreshToken: string;
+}
+
 class MyApp extends App<any> {
   public render() {
     const { Component, pageProps, apollo } = this.props;
@@ -37,10 +42,12 @@ class MyApp extends App<any> {
 
 MyApp.getInitialProps = async appContext => {
   const appProps = await App.getInitialProps(appContext);
+
   return { ...appProps };
 };
 
 export default withApollo(({ initialState }) => {
+  console.log("initialState", initialState);
   const httpLink = createHttpLink({
     uri: "http://localhost:4000/graphql",
     fetch,
@@ -50,7 +57,8 @@ export default withApollo(({ initialState }) => {
   const authLink = setContext(async (_, ctx) => {
     const accessToken = cookie.get("accessToken");
     const refreshToken = cookie.get("refreshToken");
-    const token = await checkExpiredToken(accessToken, refreshToken);
+
+    const token: TokenType = await checkExpiredToken(accessToken, refreshToken);
 
     // console.log("token", token );
 
@@ -59,7 +67,7 @@ export default withApollo(({ initialState }) => {
     return {
       headers: {
         ...ctx.headers,
-        authorization: accessToken ? `Bearer ${accessToken}` : ""
+        authorization: token ? `Bearer ${token?.accessToken}` : ""
       }
     };
   });

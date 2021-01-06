@@ -1,10 +1,9 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Layout from "../Layout.container";
+import Login from "../index";
 
 describe("[Layout render]", () => {
-  const container = renderer.create(<Layout />).toJSON();
-  console.log(container);
+  const container = renderer.create(<Login />).toJSON();
 
   it("[should be render", () => {
     expect(container).toMatchSnapshot();

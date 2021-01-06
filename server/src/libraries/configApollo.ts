@@ -10,7 +10,6 @@ const resolvers: any = mergeResolvers(allResolvers);
 const context = async ({ req }: any) => {
   const accessToken = await authorizations().getAccessTokenFromHeader(req);
 
-  console.log("accessToken", accessToken);
   const user = await authorizations().getUserFromAccessToken(accessToken);
   return { ...req };
 };
