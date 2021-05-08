@@ -31,7 +31,7 @@
     "merge-graphql-schemas": "^1.7.6",
     "nodemon": "^2.0.2",
     "path": "^0.12.7",
-    "typeorm": "^0.2.22"
+    "typeorm": "^0.2.25"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.10.2",
